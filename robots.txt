@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://victoriachengyw.com/us-visiting-scholar-guide/sitemap.xml
+Sitemap: https://victoriac1122.github.io/us-visiting-scholar-guide/sitemap.xml
