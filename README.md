@@ -2,6 +2,8 @@
 
 一個面向學弟妹與第一次準備美國訪問研究者的公開指南。內容涵蓋研究定位、接待單位、DS-2019、SEVIS、J-1 簽證、行前準備與抵達報到。
 
+線上閱讀：[美國訪問學者申請與赴美指南](https://victoriac1122.github.io/us-visiting-scholar-guide/)
+
 ## 特點
 
 - 純 HTML、CSS、JavaScript，不需要建置工具。
