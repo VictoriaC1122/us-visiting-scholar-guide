@@ -1,139 +1,59 @@
-const tabButtons = Array.from(document.querySelectorAll("[role='tab'][data-tab]"));
-const tabPanels = Array.from(document.querySelectorAll("[role='tabpanel']"));
-const mobileSelect = document.querySelector("#mobile-tab-select");
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const validTabs = new Set(tabButtons.map((button) => button.dataset.tab));
+const progressBar = document.querySelector("#reading-progress-bar");
+const tocLinks = Array.from(document.querySelectorAll(".toc-link"));
+const chapters = tocLinks
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+const mobileToc = document.querySelector(".mobile-toc");
+let framePending = false;
 
-function tabFromHash() {
-  const requested = window.location.hash.slice(1);
-  return validTabs.has(requested) ? requested : "overview";
+function updateReadingState() {
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollable > 0 ? Math.min(100, Math.max(0, (window.scrollY / scrollable) * 100)) : 0;
+  progressBar.style.width = `${progress}%`;
+
+  let currentId = chapters[0]?.id;
+  chapters.forEach((chapter) => {
+    if (chapter.getBoundingClientRect().top <= 180) currentId = chapter.id;
+  });
+
+  tocLinks.forEach((link) => {
+    const active = link.getAttribute("href") === `#${currentId}`;
+    link.classList.toggle("is-active", active);
+    if (active) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+
+  framePending = false;
 }
 
-function activateTab(tabId, options = {}) {
-  const { updateHistory = false, focusTab = false, scroll = false } = options;
-  const activeButton = tabButtons.find((button) => button.dataset.tab === tabId);
-  const activePanel = tabPanels.find((panel) => panel.id === tabId);
-
-  if (!activeButton || !activePanel) return;
-
-  tabButtons.forEach((button) => {
-    const selected = button === activeButton;
-    button.classList.toggle("active", selected);
-    button.setAttribute("aria-selected", String(selected));
-    button.tabIndex = selected ? 0 : -1;
-  });
-
-  tabPanels.forEach((panel) => {
-    const selected = panel === activePanel;
-    panel.classList.toggle("active", selected);
-    panel.hidden = !selected;
-  });
-
-  mobileSelect.value = tabId;
-
-  if (updateHistory && window.location.hash !== `#${tabId}`) {
-    window.history.pushState({ tab: tabId }, "", `#${tabId}`);
-  }
-
-  if (focusTab) activeButton.focus();
-
-  if (scroll) {
-    activePanel.scrollIntoView({
-      behavior: reducedMotion.matches ? "auto" : "smooth",
-      block: "start",
-    });
-  }
+function requestReadingUpdate() {
+  if (framePending) return;
+  framePending = true;
+  window.requestAnimationFrame(updateReadingState);
 }
 
-tabButtons.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    activateTab(button.dataset.tab, { updateHistory: true, scroll: true });
-  });
+window.addEventListener("scroll", requestReadingUpdate, { passive: true });
+window.addEventListener("resize", requestReadingUpdate);
+updateReadingState();
 
-  button.addEventListener("keydown", (event) => {
-    const destinations = {
-      ArrowLeft: (index - 1 + tabButtons.length) % tabButtons.length,
-      ArrowRight: (index + 1) % tabButtons.length,
-      Home: 0,
-      End: tabButtons.length - 1,
-    };
-
-    if (!(event.key in destinations)) return;
-    event.preventDefault();
-    activateTab(tabButtons[destinations[event.key]].dataset.tab, {
-      updateHistory: true,
-      focusTab: true,
-    });
+mobileToc?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    mobileToc.open = false;
   });
 });
 
-mobileSelect.addEventListener("change", () => {
-  activateTab(mobileSelect.value, { updateHistory: true, scroll: true });
+const appendixDetails = Array.from(document.querySelectorAll(".appendix-list details"));
+let detailsOpenState = [];
+
+window.addEventListener("beforeprint", () => {
+  detailsOpenState = appendixDetails.map((detail) => detail.open);
+  appendixDetails.forEach((detail) => { detail.open = true; });
 });
 
-document.querySelectorAll("[data-tab-target]").forEach((link) => {
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
-    activateTab(link.dataset.tabTarget, { updateHistory: true, scroll: true });
+window.addEventListener("afterprint", () => {
+  appendixDetails.forEach((detail, index) => {
+    detail.open = detailsOpenState[index];
   });
 });
 
-window.addEventListener("hashchange", () => activateTab(tabFromHash(), { scroll: true }));
-window.addEventListener("popstate", () => activateTab(tabFromHash()));
-activateTab(tabFromHash());
-
-const checklistItems = Array.from(document.querySelectorAll("[data-check]"));
-const checkedCount = document.querySelector("#checked-count");
-const totalCount = document.querySelector("#total-count");
-const progressFill = document.querySelector("#progress-fill");
-const progressTrack = document.querySelector("[role='progressbar']");
-const resetButton = document.querySelector("#reset-checklist");
-const storageKey = "visiting-scholar-guide-checklist-v1";
-
-function readChecklist() {
-  try {
-    return JSON.parse(window.localStorage.getItem(storageKey)) || {};
-  } catch {
-    return {};
-  }
-}
-
-function writeChecklist(state) {
-  try {
-    window.localStorage.setItem(storageKey, JSON.stringify(state));
-  } catch {
-    // The checklist still works for the current page when storage is unavailable.
-  }
-}
-
-function updateProgress() {
-  const completed = checklistItems.filter((item) => item.checked).length;
-  const total = checklistItems.length;
-  const percentage = total ? Math.round((completed / total) * 100) : 0;
-  checkedCount.textContent = String(completed);
-  totalCount.textContent = String(total);
-  progressFill.style.width = `${percentage}%`;
-  progressTrack.setAttribute("aria-valuenow", String(percentage));
-}
-
-const savedChecklist = readChecklist();
-checklistItems.forEach((item) => {
-  item.checked = Boolean(savedChecklist[item.dataset.check]);
-  item.addEventListener("change", () => {
-    const state = readChecklist();
-    state[item.dataset.check] = item.checked;
-    writeChecklist(state);
-    updateProgress();
-  });
-});
-updateProgress();
-
-resetButton.addEventListener("click", () => {
-  const shouldReset = window.confirm("要清除這台裝置上保存的全部勾選進度嗎？");
-  if (!shouldReset) return;
-  checklistItems.forEach((item) => { item.checked = false; });
-  try { window.localStorage.removeItem(storageKey); } catch {}
-  updateProgress();
-});
-
-document.querySelector("#print-guide").addEventListener("click", () => window.print());
+document.querySelector("#print-note")?.addEventListener("click", () => window.print());
