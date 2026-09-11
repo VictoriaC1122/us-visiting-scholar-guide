@@ -4,6 +4,12 @@ Victoria 整理的美國訪問學者申請紀錄，包含研究規劃、聯絡�
 
 線上閱讀：[美國訪問學者申請與準備分享](https://victoriac1122.github.io/us-visiting-scholar-guide/)
 
+## 文案風格
+
+- 用 Victoria 的第一人稱寫實際做法與經驗。
+- 句子短、直接說重點，不使用抒情比喻、勵志口號或制式轉場。
+- 個人經驗與官方規定分開，還沒完成的進度要清楚標示。
+
 ## 特點
 
 - 純 HTML、CSS、JavaScript，不需要建置工具。
