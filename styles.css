@@ -672,6 +672,183 @@ p {
   line-height: 1.7 !important;
 }
 
+.cost-summary {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  margin: 30px 0 18px;
+  padding: 26px 28px;
+  overflow: hidden;
+  border: 1px solid rgba(117, 106, 148, 0.12);
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f2eef8, #edf3fa);
+  font-family: var(--font-ui);
+}
+
+.cost-summary::after {
+  position: absolute;
+  right: -24px;
+  bottom: -38px;
+  width: 126px;
+  height: 126px;
+  border: 22px solid rgba(255, 255, 255, 0.38);
+  border-radius: 50%;
+  content: "";
+}
+
+.cost-summary span,
+.cost-summary strong,
+.cost-summary small {
+  position: relative;
+  z-index: 1;
+}
+
+.cost-summary span {
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.cost-summary strong {
+  color: #4b455e;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4vw, 2.65rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.cost-summary small {
+  margin-top: 3px;
+  color: var(--ink-muted);
+  font-size: 0.74rem;
+}
+
+.cost-table-wrap {
+  margin: 0 0 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--paper-strong);
+}
+
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.cost-table caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cost-table th,
+.cost-table td {
+  padding: 15px 17px;
+  border-bottom: 1px solid var(--line-soft);
+  text-align: left;
+  vertical-align: top;
+}
+
+.cost-table thead th {
+  color: var(--ink-muted);
+  background: #f7f5f9;
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.cost-table tbody th {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.cost-table tbody td {
+  color: var(--ink-soft);
+}
+
+.cost-table tbody tr:last-child th,
+.cost-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.cost-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.cost-notes .note-box {
+  height: 100%;
+  margin: 0;
+}
+
+.extra-costs {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #faf9fb;
+  font-family: var(--font-ui);
+}
+
+.extra-costs summary {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 10px 17px;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.extra-costs summary::-webkit-details-marker {
+  display: none;
+}
+
+.extra-costs > div {
+  padding: 0 18px 16px;
+}
+
+.extra-costs p,
+.extra-costs ul {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.extra-costs ul {
+  padding-left: 1.25em;
+}
+
+.cost-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 20px !important;
+  font-family: var(--font-ui);
+  font-size: 0.78rem !important;
+}
+
+.cost-links a {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  font-weight: 700;
+}
+
 .prep-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1079,6 +1256,79 @@ details[open] > summary .disclosure-icon::after {
     grid-template-columns: 1fr;
   }
 
+  .cost-summary {
+    padding: 23px 21px;
+  }
+
+  .cost-table-wrap {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+
+  .cost-table,
+  .cost-table tbody,
+  .cost-table tr,
+  .cost-table th,
+  .cost-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .cost-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .cost-table tbody tr {
+    margin-bottom: 10px;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--paper-strong);
+  }
+
+  .cost-table tbody th,
+  .cost-table tbody td {
+    padding: 0;
+    border: 0;
+  }
+
+  .cost-table tbody th {
+    margin-bottom: 10px;
+    font-size: 0.91rem;
+  }
+
+  .cost-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 7px;
+    color: var(--ink);
+    text-align: right;
+  }
+
+  .cost-table tbody td::before {
+    flex: 0 0 auto;
+    color: var(--ink-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    content: attr(data-label);
+  }
+
+  .cost-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .cost-links {
+    display: grid;
+    gap: 2px;
+  }
+
   .prep-grid,
   .document-grid,
   .source-links {
@@ -1214,6 +1464,10 @@ details[open] > summary .disclosure-icon::after {
 
   .note-box,
   .overview-box,
+  .cost-summary,
+  .cost-table tbody tr,
+  .cost-notes .note-box,
+  .extra-costs,
   .prep-grid section,
   .document-grid section,
   .source-links a,
