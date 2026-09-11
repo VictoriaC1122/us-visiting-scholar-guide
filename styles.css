@@ -509,34 +509,168 @@ p {
   margin-top: 8px;
 }
 
-.overview-box {
-  margin: 32px 0 8px;
-  padding: 24px 28px;
-  border: 1px solid rgba(117, 106, 148, 0.11);
-  border-radius: 19px;
-  background: linear-gradient(135deg, #f5f2f9, #f1f5fa);
+.journey-map {
+  --flow-axis: 20px;
+  --flow-rail: rgba(117, 106, 148, 0.24);
+  --flow-arrow: #8f84b0;
+  --flow-surface: #f8f7fb;
+  margin: 34px 0 8px;
+  padding: 27px 29px 24px;
+  border: 1px solid rgba(117, 106, 148, 0.12);
+  border-radius: 22px;
+  background: var(--flow-surface);
 }
 
-.overview-box > p {
-  margin-bottom: 12px;
-  color: var(--ink) !important;
+.journey-map__head {
+  margin-bottom: 22px;
+  padding: 0 2px 20px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.journey-map__kicker {
+  margin: 0 0 3px !important;
+  color: var(--plum) !important;
   font-family: var(--font-ui);
-  font-size: 0.88rem;
+  font-size: 0.69rem !important;
   font-weight: 700;
+  letter-spacing: 0.13em;
 }
 
-.overview-box ol {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 32px;
+.journey-map__head h3 {
   margin: 0;
-  padding-left: 1.5em;
+  color: #454153;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: -0.015em;
 }
 
-.overview-box li {
-  padding-left: 2px;
-  font-size: 0.93rem;
+.journey-map__head > p:last-child {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.79rem;
   line-height: 1.7;
+}
+
+.journey-flow {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.journey-flow::before {
+  position: absolute;
+  top: 25px;
+  bottom: 25px;
+  left: var(--flow-axis);
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--flow-rail) 6%, var(--flow-rail) 94%, transparent);
+  content: "";
+}
+
+.journey-flow > li {
+  position: relative;
+  margin: 0 !important;
+}
+
+.journey-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  min-width: 0;
+  min-height: 64px;
+  align-items: center;
+  padding: 10px 14px 11px 0;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  color: var(--ink-soft);
+  background: transparent;
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.journey-step__marker {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  margin-left: 3px;
+  place-items: center;
+  border: 1px solid rgba(117, 106, 148, 0.18);
+  border-radius: 50%;
+  color: #5c5570;
+  background: var(--paper);
+  font-family: var(--font-ui);
+  font-size: 0.71rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.journey-step__body {
+  min-width: 0;
+  transition: transform 160ms ease;
+}
+
+.journey-step__body strong,
+.journey-step__body small {
+  display: block;
+}
+
+.journey-step__body strong {
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.journey-step__body small {
+  margin-top: 2px;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.62;
+}
+
+.journey-flow > li:not(:last-child) .journey-step::after {
+  position: absolute;
+  z-index: 3;
+  bottom: -10px;
+  left: calc(var(--flow-axis) - 3.5px);
+  width: 6px;
+  height: 6px;
+  border: solid var(--flow-arrow);
+  border-width: 0 1.5px 1.5px 0;
+  background: var(--flow-surface);
+  outline: 2px solid var(--flow-surface);
+  pointer-events: none;
+  content: "";
+  transform: rotate(45deg);
+}
+
+@media (hover: hover) {
+  .journey-step:hover {
+    border-color: rgba(117, 106, 148, 0.11);
+    background: rgba(117, 106, 148, 0.045);
+  }
+
+  .journey-step:hover .journey-step__body {
+    transform: translateX(3px);
+  }
+
+  .journey-step:hover .journey-step__marker {
+    border-color: rgba(117, 106, 148, 0.3);
+    background: var(--plum-wash);
+  }
 }
 
 .note-box {
@@ -1335,13 +1469,50 @@ details[open] > summary .disclosure-icon::after {
     line-height: 1.88;
   }
 
-  .overview-box {
-    padding: 21px 21px;
+  .journey-map {
+    --flow-axis: 16px;
+    margin-top: 28px;
+    padding: 22px 16px 19px;
+    border-radius: 18px;
   }
 
-  .overview-box ol {
-    grid-template-columns: 1fr;
-    gap: 5px;
+  .journey-map__head {
+    margin-bottom: 17px;
+    padding: 0 2px 16px;
+  }
+
+  .journey-map__head h3 {
+    margin: 0;
+    font-size: 1.22rem;
+  }
+
+  .journey-flow {
+    gap: 7px;
+  }
+
+  .journey-flow::before {
+    top: 23px;
+    bottom: 23px;
+    left: var(--flow-axis);
+  }
+
+  .journey-step {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 11px;
+    min-height: 58px;
+    padding: 9px 6px 10px 0;
+    border-radius: 12px;
+  }
+
+  .journey-step__marker {
+    width: 30px;
+    height: 30px;
+    margin-left: 1px;
+    font-size: 0.67rem;
+  }
+
+  .journey-flow > li:not(:last-child) .journey-step::after {
+    bottom: -7px;
   }
 
   .steps {
@@ -1563,7 +1734,6 @@ details[open] > summary .disclosure-icon::after {
   }
 
   .note-box,
-  .overview-box,
   .grant-status,
   .grant-facts > div,
   .cost-summary,
@@ -1578,6 +1748,20 @@ details[open] > summary .disclosure-icon::after {
     color: #222;
     background: #fff;
     box-shadow: none;
+  }
+
+  .journey-map {
+    border: 0;
+    background: #fff;
+  }
+
+  .journey-step {
+    break-inside: avoid;
+  }
+
+  .journey-flow::before,
+  .journey-step::after {
+    display: none !important;
   }
 
   .accordion-list details {
