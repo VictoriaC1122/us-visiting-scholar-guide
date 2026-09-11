@@ -239,7 +239,6 @@ summary {
 .mobile-toc,
 .source-line,
 .checked-date,
-.privacy-note,
 .article-footer {
   font-family: var(--font-ui);
 }
@@ -1388,28 +1387,6 @@ details[open] > summary .disclosure-icon::after {
   border-top: 1px solid var(--line);
 }
 
-.privacy-note {
-  margin-top: 42px;
-  padding: 19px 21px;
-  border: 1px solid var(--line-soft);
-  border-radius: 14px;
-  color: var(--ink-muted);
-  background: #f8f7f9;
-  font-size: 0.77rem;
-  line-height: 1.7;
-}
-
-.privacy-note strong {
-  display: block;
-  margin-bottom: 4px;
-  color: var(--ink-soft);
-  font-weight: 700;
-}
-
-.privacy-note p {
-  margin: 0;
-}
-
 .article-footer {
   display: flex;
   align-items: center;
@@ -1862,8 +1839,7 @@ details[open] > summary .disclosure-icon::after {
   .extra-costs,
   .prep-grid section,
   .document-grid section,
-  .source-links a,
-  .privacy-note {
+  .source-links a {
     break-inside: avoid;
     color: #222;
     background: #fff;
