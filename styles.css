@@ -579,6 +579,94 @@ p {
   font-weight: 700;
 }
 
+.grant-status {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  margin: 30px 0 34px;
+  padding: 25px 27px;
+  overflow: hidden;
+  border: 1px solid rgba(117, 106, 148, 0.13);
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f2eef8, #edf3fa);
+  font-family: var(--font-ui);
+}
+
+.grant-status::after {
+  position: absolute;
+  right: -32px;
+  bottom: -45px;
+  width: 138px;
+  height: 138px;
+  border: 23px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  content: "";
+}
+
+.grant-status span,
+.grant-status strong,
+.grant-status p {
+  position: relative;
+  z-index: 1;
+}
+
+.grant-status span {
+  color: var(--ink-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.grant-status strong {
+  color: #4b455e;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 1.72rem);
+  font-weight: 600;
+}
+
+.grant-status p {
+  max-width: 590px;
+  margin: 4px 0 0;
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
+
+.grant-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  margin: 19px 0 26px;
+  font-family: var(--font-ui);
+}
+
+.grant-facts > div {
+  padding: 18px 17px;
+  border: 1px solid var(--line-soft);
+  border-top: 3px solid rgba(117, 106, 148, 0.42);
+  border-radius: 15px;
+  background: #faf9fb;
+}
+
+.grant-facts span,
+.grant-facts strong {
+  display: block;
+}
+
+.grant-facts span {
+  margin-bottom: 7px;
+  color: var(--plum);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+.grant-facts strong {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.68;
+}
+
 .steps {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -823,6 +911,10 @@ p {
   padding: 0 18px 16px;
 }
 
+.nstc-details {
+  margin: 7px 0 28px;
+}
+
 .extra-costs p,
 .extra-costs ul {
   margin: 0;
@@ -960,7 +1052,7 @@ details[open] > summary .disclosure-icon::after {
 
 .document-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   padding: 2px 0 26px;
 }
@@ -1256,6 +1348,14 @@ details[open] > summary .disclosure-icon::after {
     grid-template-columns: 1fr;
   }
 
+  .grant-status {
+    padding: 22px 21px;
+  }
+
+  .grant-facts {
+    grid-template-columns: 1fr;
+  }
+
   .cost-summary {
     padding: 23px 21px;
   }
@@ -1464,6 +1564,8 @@ details[open] > summary .disclosure-icon::after {
 
   .note-box,
   .overview-box,
+  .grant-status,
+  .grant-facts > div,
   .cost-summary,
   .cost-table tbody tr,
   .cost-notes .note-box,
