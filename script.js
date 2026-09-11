@@ -42,7 +42,7 @@ mobileToc?.querySelectorAll("a").forEach((link) => {
   });
 });
 
-const appendixDetails = Array.from(document.querySelectorAll(".appendix-list details"));
+const appendixDetails = Array.from(document.querySelectorAll(".accordion-list details"));
 let detailsOpenState = [];
 
 window.addEventListener("beforeprint", () => {
