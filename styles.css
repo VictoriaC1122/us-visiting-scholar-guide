@@ -894,6 +894,50 @@ p {
   line-height: 1.7 !important;
 }
 
+.interview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin: 25px 0 16px;
+}
+
+.interview-grid section {
+  padding: 21px 21px 18px;
+  border: 1px solid var(--line-soft);
+  border-top: 3px solid rgba(117, 106, 148, 0.4);
+  border-radius: 16px;
+  background: #fbfafc;
+}
+
+.interview-grid h3 {
+  margin: 0 0 11px;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.interview-grid ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.interview-grid li {
+  font-size: 0.85rem;
+  line-height: 1.68;
+}
+
+.interview-grid li + li {
+  margin-top: 6px;
+}
+
+.interview-docs {
+  margin: 16px 0 26px;
+}
+
+.interview-docs > div p + p {
+  margin-top: 12px;
+}
+
 .cost-summary {
   position: relative;
   display: grid;
@@ -923,6 +967,42 @@ p {
 .cost-summary small {
   position: relative;
   z-index: 1;
+}
+
+.cost-totals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0 0 18px;
+  font-family: var(--font-ui);
+}
+
+.cost-totals > div {
+  min-width: 0;
+  padding: 16px 15px;
+  border: 1px solid var(--line-soft);
+  border-radius: 14px;
+  background: #faf9fb;
+}
+
+.cost-totals span,
+.cost-totals strong {
+  display: block;
+}
+
+.cost-totals span {
+  margin-bottom: 5px;
+  color: var(--ink-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.cost-totals strong {
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .cost-summary span {
@@ -1001,6 +1081,15 @@ p {
 .cost-table tbody tr:last-child th,
 .cost-table tbody tr:last-child td {
   border-bottom: 0;
+}
+
+.cost-table .cost-group th {
+  padding: 9px 17px;
+  color: var(--plum);
+  background: #f7f5f9;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
 }
 
 .cost-notes {
@@ -1527,6 +1616,11 @@ details[open] > summary .disclosure-icon::after {
     grid-template-columns: 1fr;
   }
 
+  .interview-grid,
+  .cost-totals {
+    grid-template-columns: 1fr;
+  }
+
   .cost-summary {
     padding: 23px 21px;
   }
@@ -1561,6 +1655,28 @@ details[open] > summary .disclosure-icon::after {
     border: 1px solid var(--line);
     border-radius: 15px;
     background: var(--paper-strong);
+  }
+
+  .cost-table tbody tr.cost-group {
+    margin: 22px 0 8px;
+    padding: 0 2px 8px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .cost-table tbody tr.cost-group:first-child {
+    margin-top: 0;
+  }
+
+  .cost-table .cost-group th {
+    margin: 0;
+    padding: 0;
+    color: var(--plum);
+    background: transparent;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
   }
 
   .cost-table tbody th,
@@ -1601,12 +1717,14 @@ details[open] > summary .disclosure-icon::after {
   }
 
   .prep-grid,
+  .interview-grid,
   .document-grid,
   .source-links {
     grid-template-columns: 1fr;
   }
 
-  .prep-grid section {
+  .prep-grid section,
+  .interview-grid section {
     padding: 19px 20px 17px;
   }
 
@@ -1736,7 +1854,9 @@ details[open] > summary .disclosure-icon::after {
   .note-box,
   .grant-status,
   .grant-facts > div,
+  .interview-grid section,
   .cost-summary,
+  .cost-totals > div,
   .cost-table tbody tr,
   .cost-notes .note-box,
   .extra-costs,
