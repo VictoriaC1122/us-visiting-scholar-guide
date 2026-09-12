@@ -1,27 +1,39 @@
 const progressBar = document.querySelector("#reading-progress-bar");
-const tocLinks = Array.from(document.querySelectorAll(".toc-link"));
-const chapters = tocLinks
+const desktopTocLinks = Array.from(document.querySelectorAll(".toc-link"));
+const mobileTocLinks = Array.from(document.querySelectorAll(".mobile-toc a"));
+const tocLinks = [...desktopTocLinks, ...mobileTocLinks];
+const chapters = desktopTocLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
-const mobileToc = document.querySelector(".mobile-toc");
 let framePending = false;
+let activeId = "";
 
 function updateReadingState() {
-  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = scrollable > 0 ? Math.min(100, Math.max(0, (window.scrollY / scrollable) * 100)) : 0;
-  progressBar.style.width = `${progress}%`;
+  let progress = 0;
+  if (progressBar) {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+  }
 
   let currentId = chapters[0]?.id;
-  chapters.forEach((chapter) => {
-    if (chapter.getBoundingClientRect().top <= 180) currentId = chapter.id;
-  });
+  for (let index = chapters.length - 1; index >= 0; index -= 1) {
+    if (chapters[index].getBoundingClientRect().top <= 180) {
+      currentId = chapters[index].id;
+      break;
+    }
+  }
 
-  tocLinks.forEach((link) => {
-    const active = link.getAttribute("href") === `#${currentId}`;
-    link.classList.toggle("is-active", active);
-    if (active) link.setAttribute("aria-current", "location");
-    else link.removeAttribute("aria-current");
-  });
+  if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+
+  if (currentId && currentId !== activeId) {
+    tocLinks.forEach((link) => {
+      const active = link.getAttribute("href") === `#${currentId}`;
+      link.classList.toggle("is-active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+    activeId = currentId;
+  }
 
   framePending = false;
 }
@@ -32,15 +44,11 @@ function requestReadingUpdate() {
   window.requestAnimationFrame(updateReadingState);
 }
 
-window.addEventListener("scroll", requestReadingUpdate, { passive: true });
-window.addEventListener("resize", requestReadingUpdate);
-updateReadingState();
-
-mobileToc?.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    mobileToc.open = false;
-  });
-});
+if (progressBar || chapters.length) {
+  window.addEventListener("scroll", requestReadingUpdate, { passive: true });
+  window.addEventListener("resize", requestReadingUpdate);
+  updateReadingState();
+}
 
 const appendixDetails = Array.from(document.querySelectorAll(".accordion-list details, .extra-costs"));
 let detailsOpenState = [];
@@ -51,9 +59,15 @@ window.addEventListener("beforeprint", () => {
 });
 
 window.addEventListener("afterprint", () => {
+  if (!detailsOpenState.length) return;
   appendixDetails.forEach((detail, index) => {
     detail.open = detailsOpenState[index];
   });
+  detailsOpenState = [];
 });
 
-document.querySelector("#print-note")?.addEventListener("click", () => window.print());
+const printButton = document.querySelector("#print-note");
+if (printButton) {
+  printButton.hidden = false;
+  printButton.addEventListener("click", () => window.print());
+}

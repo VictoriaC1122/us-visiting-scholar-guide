@@ -1,5 +1,4 @@
 :root {
-  --background: #f5f3f8;
   --paper: #fdfcfe;
   --paper-strong: #ffffff;
   --ink: #474457;
@@ -8,7 +7,6 @@
   --line: rgba(83, 79, 109, 0.14);
   --line-soft: rgba(83, 79, 109, 0.08);
   --plum: #756a94;
-  --plum-soft: #9f96c6;
   --plum-wash: #f3f0f8;
   --blue-wash: #eef3fa;
   --warm-wash: #faf2e9;
@@ -27,7 +25,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 104px;
 }
 
 body {
@@ -42,10 +39,8 @@ body {
     linear-gradient(180deg, #fcfbfd 0%, #f3eff7 44%, #eef2f8 74%, #f8f1eb 100%);
   font-family: var(--font-body);
   font-size: 1rem;
-  font-kerning: normal;
   line-height: 1.84;
   letter-spacing: 0.008em;
-  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -110,9 +105,11 @@ summary {
 
 .reading-progress span {
   display: block;
-  width: 0;
+  width: 100%;
   height: 100%;
   background: linear-gradient(90deg, #8ea6c9, #9f8bb2);
+  transform: scaleX(0);
+  transform-origin: left center;
 }
 
 .page-shell {
@@ -133,10 +130,8 @@ summary {
   padding: 11px 16px 11px 12px;
   border: 1px solid rgba(255, 255, 255, 0.78);
   border-radius: 24px;
-  background: rgba(253, 252, 254, 0.84);
+  background: rgba(253, 252, 254, 0.96);
   box-shadow: 0 12px 34px rgba(76, 72, 98, 0.075);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
 }
 
 .brand {
@@ -212,6 +207,7 @@ summary {
 .article-head {
   position: relative;
   overflow: hidden;
+  scroll-margin-top: 112px;
   padding: clamp(48px, 7vw, 84px) clamp(28px, 8vw, 96px);
   border: 1px solid var(--line-soft);
   border-radius: 34px;
@@ -354,6 +350,11 @@ p {
   color: var(--ink-soft);
   font-size: 0.88rem;
   font-weight: 500;
+}
+
+.mobile-toc a[aria-current="location"] {
+  color: #534b69;
+  font-weight: 700;
 }
 
 .article-layout {
@@ -1431,10 +1432,6 @@ details[open] > summary .disclosure-icon::after {
 }
 
 @media (max-width: 760px) {
-  html {
-    scroll-padding-top: 84px;
-  }
-
   .page-shell {
     width: min(1240px, calc(100% - 24px));
     padding: 12px 0 40px;
@@ -1836,7 +1833,6 @@ details[open] > summary .disclosure-icon::after {
   .cost-totals > div,
   .cost-table tbody tr,
   .cost-notes .note-box,
-  .extra-costs,
   .prep-grid section,
   .document-grid section,
   .source-links a {
@@ -1862,6 +1858,20 @@ details[open] > summary .disclosure-icon::after {
 
   .accordion-list details {
     display: block;
+  }
+
+  details::details-content {
+    content-visibility: visible !important;
+  }
+
+  .extra-costs > div,
+  .accordion-list details > .faq-list {
+    display: block !important;
+  }
+
+  .accordion-list details > .document-grid,
+  .accordion-list details > .source-links {
+    display: grid !important;
   }
 
   .accordion-list .disclosure-icon {

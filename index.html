@@ -20,8 +20,8 @@
   <meta property="og:url" content="https://victoriac1122.github.io/us-visiting-scholar-guide/">
   <meta property="article:author" content="Victoria Cheng">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="styles.css?v=7">
-  <script defer src="script.js?v=5"></script>
+  <link rel="stylesheet" href="styles.css?v=8">
+  <script defer src="script.js?v=6"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">直接前往主要內容</a>
@@ -51,24 +51,26 @@
 
         <details class="mobile-toc">
           <summary><span>文章目錄</span><span class="disclosure-icon" aria-hidden="true"></span></summary>
-          <ol>
-            <li><a href="#intro">前言</a></li>
-            <li><a href="#planning">申請前準備</a></li>
-            <li><a href="#host">聯絡接待教授</a></li>
-            <li><a href="#school">學校行政與 DS-2019</a></li>
-            <li><a href="#nstc">千里馬計畫</a></li>
-            <li><a href="#visa">J-1 簽證</a></li>
-            <li><a href="#costs">實際花費</a></li>
-            <li><a href="#departure">赴美前準備</a></li>
-            <li><a href="#arrival">抵達後事項</a></li>
-            <li><a href="#appendix">文件與官方連結</a></li>
-          </ol>
+          <nav aria-label="文章目錄">
+            <ol>
+              <li><a href="#intro">前言</a></li>
+              <li><a href="#planning">申請前準備</a></li>
+              <li><a href="#host">聯絡接待教授</a></li>
+              <li><a href="#school">學校行政與 DS-2019</a></li>
+              <li><a href="#nstc">千里馬計畫</a></li>
+              <li><a href="#visa">J-1 簽證</a></li>
+              <li><a href="#costs">實際花費</a></li>
+              <li><a href="#departure">赴美前準備</a></li>
+              <li><a href="#arrival">抵達後事項</a></li>
+              <li><a href="#appendix">文件與官方連結</a></li>
+            </ol>
+          </nav>
         </details>
 
         <div class="article-layout">
-          <aside class="desktop-toc" aria-label="文章目錄">
+          <aside class="desktop-toc">
             <p>文章目錄</p>
-            <nav>
+            <nav aria-label="文章目錄">
               <a class="toc-link is-active" href="#intro">前言</a>
               <a class="toc-link" href="#planning">一、申請前準備</a>
               <a class="toc-link" href="#host">二、聯絡接待教授</a>
@@ -80,7 +82,7 @@
               <a class="toc-link" href="#arrival">八、抵達後事項</a>
               <a class="toc-link" href="#appendix">九、文件與官方連結</a>
             </nav>
-            <button type="button" id="print-note">列印／另存 PDF</button>
+            <button type="button" id="print-note" hidden>列印／另存 PDF</button>
           </aside>
 
           <div class="article-body">
@@ -181,10 +183,6 @@
                 <li>CV 和一頁研究說明</li>
               </ol>
               <p>教授很快回覆願意接待，但這還不是正式邀請。後面還要經過系所和學院核准，我也補了一份研究 proposal。大約再等一個月，才拿到需要簽回的 offer／appointment letter。</p>
-              <aside class="note-box">
-                <strong>我後來才知道</strong>
-                <p>有些校方表單和連結會過期。我這次中間多等了幾週，就得重新填寫，所以行政信上的期限真的要看。</p>
-              </aside>
             </section>
 
             <section class="article-section" id="school" aria-labelledby="school-title">
@@ -423,7 +421,7 @@
               <p class="source-line">RO／ARO 是 sponsor 負責 J-1 計畫的承辦人。遇到身分問題時，直接詢問承辦人；期限可參考 <a href="https://www.ecfr.gov/current/title-22/part-62/section-62.13" target="_blank" rel="noopener noreferrer">22 CFR § 62.13</a>，SEVIS 狀態可參考 <a href="https://j1visa.state.gov/exchange-visitor-lifecycle/" target="_blank" rel="noopener noreferrer">BridgeUSA Exchange Visitor Lifecycle</a>。</p>
             </section>
 
-            <section class="article-section appendix" id="appendix" aria-labelledby="appendix-title">
+            <section class="article-section" id="appendix" aria-labelledby="appendix-title">
               <h2 id="appendix-title">九、文件清單與官方連結</h2>
 
               <div class="accordion-list">
