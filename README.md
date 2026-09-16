@@ -4,6 +4,8 @@ Victoria 整理的美國訪問學者申請紀錄，包含研究規劃、聯絡�
 
 線上閱讀：[美國訪問學者申請與準備分享](https://victoriac1122.github.io/us-visiting-scholar-guide/)
 
+English: [My U.S. Visiting Scholar Application](https://victoriac1122.github.io/us-visiting-scholar-guide/en/)
+
 ## 文案風格
 
 - 用 Victoria 的第一人稱寫實際做法與經驗。
@@ -16,6 +18,7 @@ Victoria 整理的美國訪問學者申請紀錄，包含研究規劃、聯絡�
 - 使用 Noto Serif TC 閱讀字體與 Noto Sans TC 介面字體，搭配個人網站的柔和配色。
 - 內容採編號章節、短段落與條列；桌機有章節目錄，手機有折疊目錄。
 - 無 JavaScript 時仍可閱讀完整文章；列印時會自動展開文末附錄。
+- 提供繁體中文與英文版本，並可從頁首切換語言。
 - 不含分析追蹤、私人聯絡方式、住址、精確行程或證件資料。
 - 個人紀錄只以去識別化摘要呈現，不公開私人信件、對話原文或文件截圖。
 - 簽證與 J-1 內容附美國政府官方來源。

@@ -183,6 +183,35 @@ summary {
   text-transform: uppercase;
 }
 
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 7px 10px;
+  border: 1px solid rgba(117, 106, 148, 0.12);
+  border-radius: 12px;
+  color: #5c5374;
+  background: var(--plum-wash);
+  font-family: var(--font-ui);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.language-switch:hover {
+  color: #4f4668;
+  background: #ebe6f3;
+}
+
 .personal-site {
   display: inline-flex;
   align-items: center;
@@ -1468,6 +1497,12 @@ details[open] > summary .disclosure-icon::after {
     font-size: 0.78rem;
   }
 
+  .language-switch {
+    min-width: 42px;
+    min-height: 42px;
+    padding: 6px 8px;
+  }
+
   .article-head {
     padding: 42px 22px 39px;
     border-radius: 23px;
@@ -1725,6 +1760,16 @@ details[open] > summary .disclosure-icon::after {
 
   .personal-site {
     font-size: 0.74rem;
+  }
+
+  .top-actions {
+    gap: 0;
+  }
+
+  .language-switch {
+    min-width: 40px;
+    padding-inline: 6px;
+    font-size: 0.7rem;
   }
 
   .article-head h1 {
